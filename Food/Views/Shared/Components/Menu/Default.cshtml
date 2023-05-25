@@ -1,0 +1,131 @@
+﻿@model IEnumerable<ReviewFood.Models.DanhMucCha>
+
+<style>
+
+
+    li a, .dropbtn {
+        display: inline-block;
+        color: white;
+        text-align: center;
+        padding: 0px 1px;
+        text-decoration: none;
+    }
+
+        li a:hover, .dropdown:hover .dropbtn {
+            background-color: #FFFFFF;
+        }
+
+    li.dropdown {
+        display: inline-block;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+    }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+        }
+
+            .dropdown-content a:hover {
+                background-color: #f1f1f1;
+            }
+
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+</style>
+
+<nav class="header__nav-wrap">
+
+    <h2 class="header__nav-heading h1">Navigate to</h2>
+    <ul class="header__nav">
+        <li class="current" style=" width: 135px; "><a href="/" title="">Home</a></li>
+        @foreach (var item in Model)
+        {
+                <li class="dropdown" style="width: 200px; ">
+                    <a href="/DanhMuc/Index/@item.Id" class="dropbtn">@item.TenDM</a>
+                    <div class="dropdown-content" style="width:170px">
+
+                    @foreach(var dmcon in item.DanhMucs)
+                    {
+                        <a href="/DanhMuc/Index/@dmcon.Id">@dmcon.TenDanhMuc</a>
+                    }
+
+                    </div>
+                </li>
+           
+           
+        }
+        @if (Context.Session.GetString("TaiKhoan") == null)
+        {
+            <li><a href="/TaiKhoan/Login" title="">Đăng nhập</a></li>
+            <li><a href="/TaiKhoan/Create" title="">Đăng ký</a></li>
+        }
+        else
+        {
+            string data = Context.Session.GetString("TaiKhoan").ToString();
+            if (data == null)
+            {
+                <li><a href="/TaiKhoan/Login" title="">Đăng nhập</a></li>
+                <li><a href="/TaiKhoan/Create" title="">Đăng ký</a></li>
+            }
+            else
+            {
+                if (data.Split(',')[3] == "true")
+                {
+                    <li class="dropdown-header">
+                        <a href="/Admin/Home"
+                           class="dropdown-toggle"
+                           data-toggle="dropdown"
+                           role="button"
+                           aria-haspopup="true"
+                           aria-expanded="false">
+                            Admin Page
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="btn-outline-success"><a href="/TaiKhoan/Logout">Đăng Xuất</a></li>
+                        </ul>
+                    </li>
+                }
+                else
+                {
+                    string userData = Context.Session.GetString("TaiKhoan");
+                    if (userData != null)
+                    {
+                        string userName = userData.Split(',')[1];
+                        <li class="dropdown">
+                            <a href="/TaiKhoan/Detail/@userData.Split(',')[2]"
+                               class="dropdown-toggle"
+                               data-toggle="dropdown"
+                               role="button"
+                               aria-haspopup="true"
+                               aria-expanded="false">
+                                Xin chào @userName
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li class="btn-outline-success"><a href="/TaiKhoan/Edit/@userData.Split(',')[2]">Edit</a></li>
+                                <li class="btn-outline-success"><a href="/BaiViet/Create/@userData.Split(',')[2]">Tạo Post</a></li>
+                                <li class="btn-outline-success"><a href="/TaiKhoan/Logout">Đăng Xuất</a></li>
+                            </ul>
+                        </li>
+                    }
+                }
+            }
+        }
+
+
+    </ul> <!-- end header__nav -->
+    <a href="#0" title="Close Menu" class="header__overlay-close close-mobile-menu">Close</a>
+
+</nav>

@@ -1,0 +1,13 @@
+﻿{
+  "output": {
+    "wwwroot/css/site.min.css": [
+      "wwwroot/css/bootstrap.css",
+      "wwwroot/css/site.css"
+    ],
+    "wwwroot/js/site.min.js": [
+      "wwwroot/js/jquery-{version}.js",
+      "wwwroot/js/bootstrap.js",
+      "wwwroot/js/custom.js"
+    ]
+  }
+}

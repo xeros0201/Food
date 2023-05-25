@@ -1,0 +1,10 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\Food",
+    "\\Food\\Data",
+    "\\Food\\Migrations"
+  ],
+  "SelectedNode": "\\Food\\Data\\ApplicationDbContext.cs",
+  "PreviewInSolutionExplorer": false
+}

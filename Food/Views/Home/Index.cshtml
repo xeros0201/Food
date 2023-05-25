@@ -1,0 +1,142 @@
+﻿@model ReviewFood.Models.BaiViet
+@{
+    ViewBag.Title = "Home Page";
+}
+<section class="s-featured">
+    <div class="row">
+        <div class="col-full">
+
+            <div class="featured-slider featured" data-aos="zoom-in">
+
+
+                @if (ViewBag?.Featured == null)
+                {
+                    <div class="featured__slide">
+
+                        <div class="entry">
+
+                            <div class="entry__background"></div>
+
+                            <div class="entry__content">
+                                <span class="entry__category"><a href="/">DanhMuc</a></span>
+
+                                <h1><a href="/" title=""> TieuDe</a></h1>
+
+                                <div class="entry__info">
+                                    <ul class="entry__meta">
+                                        <li>NgayTao</li>
+                                    </ul>
+                                </div>
+                            </div> <!-- end entry__content -->
+
+                        </div> <!-- end entry -->
+
+                    </div>
+                }
+                else
+                {
+                    
+                @foreach (var item in ViewBag?.Featured)
+                {
+                    <div class="featured__slide">
+
+                        <div class="entry">
+
+                            <div class="entry__background" style="background-image:url('/Assets/Image/');"></div>
+
+                            <div class="entry__content">
+                                    <span class="entry__category"><a href="/DanhMuc/Index/@item?.MaDanhMuc">MaDanhMuc</a></span>
+
+                                <h1><a href="/BaiViet/Index/ MaTinTuc" title=""> TieuDe</a></h1>
+
+                                <div class="entry__info">
+                                    <ul class="entry__meta">
+                                        <li> NgayTao</li>
+                                    </ul>
+                                </div>
+                            </div> <!-- end entry__content -->
+
+                        </div> <!-- end entry -->
+
+                    </div>
+                }
+                }
+
+            </div> <!-- end featured -->
+
+        </div> <!-- end col-full -->
+    </div>
+</section>
+
+
+<section class="s-content">
+
+    <div class="row entries-wrap wide">
+        <div class="entries">
+            @if( ViewBag?.TopTen == null)
+            {
+                <article class="col-block">
+
+                    <div class="item-entry" data-aos="zoom-in">
+                        <div class="item-entry__thumb">
+                            <a href="/" class="item-entry__thumb-link">
+                                <img src="https://th.bing.com/th/id/R.af5641cf84e889ccf46d93dc1524c814?rik=lMj%2blUchMAmJLA&riu=http%3a%2f%2fwww.gannett-cdn.com%2f-mm-%2f414987c999396602f2d4a57b00240c702f293a5a%2fc%3d0-50-534-352%26r%3dx1803%26c%3d3200x1800%2flocal%2f-%2fmedia%2f2015%2f01%2f20%2fUSATODAY%2fUSATODAY%2f635573577805533864-635573330936639965-Andromeda-Galaxy.jpg&ehk=wMhLzoxCddlpbsLsygnpCk2mrZUrhg5oEI4M%2fGhjMPc%3d&risl=&pid=ImgRaw&r=0"
+                                     srcset="/ " alt="Đây là hình ảnh">
+                            </a>
+                        </div>
+
+                        <div class="item-entry__text">
+                            <div class="item-entry__cat">
+                                <a href="/ "> DanhMuc</a>
+                            </div>
+
+                            <h1 class="item-entry__title">
+                                <a href="/ c"> TieuDe</a>
+                            </h1>
+
+                            <div class="item-entry__date">
+                                <a href="/"> NgayTao</a>
+                            </div>
+                        </div>
+                    </div> <!-- item-entry -->
+
+                </article> <!-- end article -->
+            }
+            else
+            {
+                
+            @foreach (var item in ViewBag?.TopTen)
+            {
+                <article class="col-block">
+
+                    <div class="item-entry" data-aos="zoom-in">
+                        <div class="item-entry__thumb">
+                            <a href="/BaiViet/Index/@item.MaTinTuc" class="item-entry__thumb-link">
+                                <img src="/Assets/Image/@item.HinhAnh"
+                                     srcset="/Assets/Image/@item.HinhAnh" alt="Đây là hình ảnh">
+                            </a>
+                        </div>
+
+                        <div class="item-entry__text">
+                            <div class="item-entry__cat">
+                                <a href="/DanhMuc/Index/@item.MaDanhMuc">@item.DanhMuc</a>
+                            </div>
+
+                            <h1 class="item-entry__title">
+                                <a href="/BaiViet/Index/@item.MaTinTuc">@item.TieuDe</a>
+                            </h1>
+
+                            <div class="item-entry__date">
+                                <a href="/BaiViet/Index/@item.MaTinTuc">@item.NgayTao</a>
+                            </div>
+                        </div>
+                    </div> <!-- item-entry -->
+
+                </article> <!-- end article -->
+            }
+
+            }
+        </div> <!-- end entries -->
+    </div> <!-- end entries-wrap -->
+
+</section> <!-- end s-content -->
